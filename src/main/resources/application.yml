@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    url: ${POSTGRE_DATABASE_URL}
+    username: ${POSTGRE_USER}
+    password: ${POSTGRE_PASSWORD}
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 20
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate:
+        enable_lazy_load_no_trans: true
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI}
+
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    lettuce:
+      pool:
+        max-active: ${REDIS_POOL_MAX_ACTIVE}
+        min-idle: 2
+        max-idle: ${REDIS_POOL_MAX_IDLE}
+        max-wait: -1ms
+      shutdown-timeout: 100ms
+    timeout: 20000
+    database: ${REDIS_BOT_DB}
+
+rqueue:
+  scheduler:
+    delayed:
+      message:
+        time:
+          interval: 1000
+
+auction:
+  max-price-steps: ${MAX_PRICE_STEPS}
+  service:
+    url: ${AUCTION_SERVICE_URL}
