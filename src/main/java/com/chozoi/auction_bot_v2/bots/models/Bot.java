@@ -1,5 +1,6 @@
 package com.chozoi.auction_bot_v2.bots.models;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,6 @@ public class Bot implements Serializable {
 
     @Id
     private Long auctionId;
-
     private Long priceTarget;
-    private Boolean isStarted;
+    private Long maxPrice;
 }

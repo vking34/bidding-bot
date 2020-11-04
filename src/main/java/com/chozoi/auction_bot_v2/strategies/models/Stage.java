@@ -6,12 +6,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document("chozoi.auction_bot_config")
+@Document(collection = "chozoi.auction_bot_config")
 @Data
 @ToString
 public class Stage {
     @Id
-    private String ID;
+    private String _id;
 
     private Integer id;
 
@@ -47,7 +47,7 @@ public class Stage {
     }
 
     public Stage(Stage stage) {
-        ID = stage.ID;
+        _id = stage._id;
         id = stage.id;
         state = stage.state;
         proportionTime = stage.proportionTime;

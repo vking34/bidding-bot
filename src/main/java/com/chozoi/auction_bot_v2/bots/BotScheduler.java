@@ -40,6 +40,7 @@ public class BotScheduler {
     @Autowired
     private BotService botService;
 
+
     @PostConstruct
     private void loadAuctions() throws InterruptedException {
         executorService.schedule(() -> {    // wait for registering queue
@@ -65,10 +66,12 @@ public class BotScheduler {
         flashBids.forEach(auction -> {
             Bot bot = botService.getBot(auction.getId());
             if (bot.getAuctionId() == null) {
-                log.warn("auction id: " + auction.getId() + ", price: " + auction.getExpectedPrice());
-                bot = new Bot(auction.getId(), auction.getExpectedPrice(), true);
+                bot = new Bot(
+                        auction.getId(),
+                        auction.getExpectedPrice(),
+                        auction.getExpectedMaxPrice()
+                        );
                 botService.saveBot(bot);
-
                 createFlashBidBot(bot);
             }
         });
@@ -77,21 +80,4 @@ public class BotScheduler {
     private void createFlashBidBot(Bot bot) {
         rqueueMessageSender.enqueue(FLASH_BID_BOT_QUEUE, bot);
     }
-
-//    public void createJob(Product product) {
-//        rqueueMessageSender.enqueue(BOT_QUEUE, product);
-//    }
-//
-//    @PostConstruct
-//    private void initJob(){
-////        executorService.schedule(() -> {
-////           rqueueMessageSender.registerQueue(BOT_QUEUE);
-////        }, 2000, TimeUnit.MILLISECONDS);
-//
-//        executorService.schedule(() -> {
-//            log.warn("producing...");
-//            Product product = new Product("fan", 3);
-//            createJob(product);
-//        }, 4000, TimeUnit.MILLISECONDS);
-//    }
 }

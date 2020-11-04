@@ -19,6 +19,7 @@ spring:
   data:
     mongodb:
       uri: ${MONGODB_URI}
+      database: chozoi
 
   redis:
     host: ${REDIS_HOST}
