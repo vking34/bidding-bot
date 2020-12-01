@@ -69,8 +69,8 @@ public class BotScheduler {
                 bot = new Bot(
                         auction.getId(),
                         auction.getExpectedPrice(),
-                        auction.getExpectedMaxPrice()
-                        );
+                        auction.getExpectedMaxPrice());
+
                 botService.saveBot(bot);
                 createFlashBidBot(bot);
             }

@@ -91,7 +91,7 @@ public class AuctionService {
         return restTemplate.postForObject(url, request, BidResponse.class);
     }
 
-    public User getCurrentWinner(Long auctionId, long phaseId){
+    public User getCurrentWinner(Long auctionId, Long phaseId){
         return flashBidResultRepository.findByIdAndPhaseId(auctionId, phaseId).getWinner();
     }
 
